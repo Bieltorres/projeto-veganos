@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Veganize</title>
+    <link rel="icon" href="./assets/img/favicon.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,30 +20,40 @@
     <div class="container">
         <header class="navbar navbar-expand-lg custom-header fixed-top">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#"><img class="logo" src="./assets/img/logo3.png" alt="logo veganize"></a>
+                <a class="navbar-brand" href="#">
+                    <img class="logo" src="./assets/img/logo4.png" alt="logo veganize">
+                </a>
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" id="searchInput" type="search" placeholder="Pesquisar produtos..."
-                        aria-label="Search">
+                        aria-label="Search" />
                 </form>
             </div>
         </header>
 
         <main class="container-fluid mt-5 pt-5">
             <div class="content-main">
-                <h1 class="text-center my-4">Promoções</h1>
-                <div class="row" id="productList"></div>
+                <section>
+                    <h1 class="text-center my-4">Hamburgers</h1>
+                    <div class="row" id="burgerList"></div>
+                </section>
+
+                <section>
+                    <h1 class="text-center my-4">Pratos</h1>
+                    <div class="row" id="dishList"></div>
+                </section>
             </div>
         </main>
 
 
-    </div>
+        <footer class="text-center text-white py-3 mt-4 custom-footer">
+            <p>&copy; 2025 Veganize Burger. Todos os direitos reservados.</p>
+        </footer>
 
-    <footer class="text-center text-white py-3 mt-4 custom-footer">
-        <p>&copy; 2025 Veganize Burguer. Todos os direitos reservados.</p>
-    </footer>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./assets/js/index.js"></script>
 </body>
+
 
 </html>

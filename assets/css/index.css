@@ -42,6 +42,23 @@ h1 {
     color: #28a745;
 }
 
+.promo-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #a77965; 
+    color: white; 
+    font-weight: bold;
+    font-size: 14px;
+    padding: 8px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center ;
+    border-radius: 50%; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
 .card img {
     height: 200px;
     object-fit: cover;
@@ -50,6 +67,8 @@ h1 {
 .card {
     box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
     border: 1px solid #f0e9cd;
+    display: flex;
+    align-items: center;
 }
 
 .card-body {
@@ -69,9 +88,17 @@ h1 {
     gap: 1rem;
 }
 
+.custom-img-product {
+    width: 70%;
+    margin-top: 1rem;
+}
+
 .btn-buy, .btn-eye {
     width: 50%;
     height: fit-content;
+    font-family: 'poppins', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
 }
 
 .btn-eye {
@@ -93,11 +120,23 @@ h1 {
     color: #264935;
 }
 
+.custom-price-promotion {
+    font-size: 20px;
+}
+
 .custom-price {
     color: #a77965;
-    font-size: 20px;
+    font-size: 24px;
     font-family: 'poppins', sans-serif;
     font-weight: 700;
+}
+
+.prices {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: baseline;
+    gap: calc(10%);
 }
 
 .btn-eye {

@@ -46,8 +46,8 @@ h1 {
     color: #28a745;
 }
 
-.btn-open-filters {
-    font-family: 'poppins';
+.form-select {
+    width: fit-content;
 }
 
 .promo-badge {
@@ -90,8 +90,13 @@ h1 {
     font-family: 'poppins', sans-serif;
 }
 
-.custom-filter {
+.btn-open-filters {
     cursor: pointer;
+}
+
+.custom-filters {
+    font-family: 'poppins', sans-serif;
+    color: #264935;
 }
 
 .about-products {
@@ -247,16 +252,17 @@ h1 {
 }
 
 .page-link {
-    opacity: 1;
+
+    opacity: .6;
     background-color: transparent;
-    color: #a77965;
-    border: 1px solid #f0e9cd;
-    border-radius: 3px;
+    color: #28a745;
+    border: 1px solid #28a745;
+    border-radius: 50%;
+    padding: 5px 12px;
 }
 
 .page-link:hover {
-    opacity: .6;
-    background-color: #a77965;
+    background-color: #28a745;
     color: #fff;
     border: 1px solid #f0e9cd;
 }

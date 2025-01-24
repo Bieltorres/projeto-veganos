@@ -11,7 +11,21 @@ const products = [
   { id: 10, name: "Vegan Pizza", price: 28.0, image: "./assets/img/imgProducts/pizza.png", category: "burger" },
 ];
 
-const productsPerPage = 2;
+let productsPerPage = 4;
+
+function handleItemsPerPageChange(select) {
+  productsPerPage = parseInt(select.value, 10);
+
+  currentPage = 1;
+  renderProducts(currentPage);
+  renderPagination();
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderProducts(currentPage);
+  renderPagination();
+});
+
 let currentPage = 1;
 let filteredProducts = [...products];
 

@@ -46,6 +46,10 @@ h1 {
     color: #28a745;
 }
 
+.btn-open-filters {
+    font-family: 'poppins';
+}
+
 .promo-badge {
     position: absolute;
     top: 10px;

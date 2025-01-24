@@ -11,11 +11,29 @@ const products = [
   { id: 10, name: "Vegan Pizza", price: 28.0, image: "./assets/img/imgProducts/pizza.png", category: "burger" },
 ];
 
-const burgerList = document.getElementById("productList");
-const searchInput = document.getElementById("searchInput");
+const productsPerPage = 2;
+let currentPage = 1;
+let filteredProducts = [...products];
 
-function renderProducts(productsToRender) {
-  products.innerHTML = "";
+const searchInput = document.getElementById("searchInput");
+const paginationControls = document.getElementById("paginationControls");
+const productList = document.getElementById("productList");
+
+const renderProducts = (page) => {
+  const startIndex = (page - 1) * productsPerPage;
+  const endIndex = startIndex + productsPerPage;
+  const productsToRender = filteredProducts.slice(startIndex, endIndex);
+
+  console.log("Página atual:", page);
+  console.log("Índices dos produtos:", startIndex, endIndex);
+  console.log("Produtos exibidos:", productsToRender);
+
+  productList.innerHTML = "";
+
+  if (productsToRender.length === 0) {
+    productList.innerHTML = "<p>Nenhum produto encontrado.</p>";
+    return;
+  }
 
   productsToRender.forEach((product) => {
     const hasPromotion = product.pricePromotion !== undefined;
@@ -31,15 +49,16 @@ function renderProducts(productsToRender) {
           <div class="card-body">
             <h5 class="card-title mt-4 mb-3">${product.name}</h5>
             <div class="prices">
-              ${hasPromotion
-        ? `
+              ${
+                hasPromotion
+                  ? `
                 <div class="price">
                   <p class="card-text custom-price-promotion text-decoration-line-through text-muted mb-1">R$${product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                   <p class="card-text custom-price mb-1">R$${product.pricePromotion.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                 </div>
                 `
-        : `<p class="card-text custom-price mb-1 text-center">R$${product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>`
-      }
+                  : `<p class="card-text custom-price mb-1 text-center">R$${product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>`
+              }
               <p class="fw-light text-muted text-center">
                   <span class="fw-bold">3x</span> de <span class="fw-bold">R$${(product.price / 3).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> sem juros
               </p>
@@ -55,25 +74,61 @@ function renderProducts(productsToRender) {
 
     productList.innerHTML += productCard;
   });
-}
+};
 
-function showDetails(productId) {
-  const product = products.find((p) => p.id === productId);
-  alert(`Product: ${product.name}\nPrice: R$${product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`);
-}
+const renderPagination = () => {
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
-function showProducts(productId) {
-  const product = products.find((p) => p.id === productId);
+  console.log("Total de produtos:", filteredProducts.length);
+  console.log("Total de páginas:", totalPages);
+
+  paginationControls.innerHTML = "";
+
+  if (totalPages === 0) {
+    return; // Se não houver páginas, não renderiza nada.
+  }
+
+  if (currentPage > totalPages) {
+    currentPage = totalPages;
+  }
+
+  for (let i = 1; i <= totalPages; i++) {
+    const pageItem = document.createElement("li");
+    const isActive = i === currentPage ? "active" : ""; // Verifica se a página atual deve ter a classe "active"
+    pageItem.classList.add("page-item");
+    if (isActive) {
+      pageItem.classList.add(isActive); // Adiciona a classe "active" apenas se for válido
+    }
+    pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+    pageItem.addEventListener("click", (e) => {
+      e.preventDefault();
+      currentPage = i;
+      renderProducts(currentPage);
+      renderPagination();
+    });
+    paginationControls.appendChild(pageItem);
+  }
+};
+
+const showDetails = (productId) => {
+  const product = filteredProducts.find((p) => p.id === productId);
   alert(`Product: ${product.name}\nPrice: R$${product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`);
-}
+};
+
+const showProducts = (productId) => {
+  const product = filteredProducts.find((p) => p.id === productId);
+  alert(`Product: ${product.name}\nPrice: R$${product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`);
+};
 
 searchInput.addEventListener("input", (e) => {
   const searchValue = e.target.value.toLowerCase();
-  const filteredProducts = products.filter((product) =>
+  filteredProducts = products.filter((product) =>
     product.name.toLowerCase().includes(searchValue)
   );
-  renderProducts(filteredProducts);
+  currentPage = 1;
+  renderProducts(currentPage);
+  renderPagination();
 });
 
-// Renderiza todos os produtos ao carregar a página
-renderProducts(products);
+renderProducts(currentPage);
+renderPagination();

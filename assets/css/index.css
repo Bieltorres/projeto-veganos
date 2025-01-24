@@ -245,3 +245,24 @@ h1 {
     cursor: pointer;
     font-weight: 800;
 }
+
+.page-link {
+    opacity: 1;
+    background-color: transparent;
+    color: #a77965;
+    border: 1px solid #f0e9cd;
+    border-radius: 3px;
+}
+
+.page-link:hover {
+    opacity: .6;
+    background-color: #a77965;
+    color: #fff;
+    border: 1px solid #f0e9cd;
+}
+
+.active>.page-link {
+    opacity: 1;
+    background-color: #28a745;
+    border: 1px solid #f0e9cd;
+}

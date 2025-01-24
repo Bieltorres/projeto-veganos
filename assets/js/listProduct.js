@@ -85,19 +85,35 @@ const renderPagination = () => {
   paginationControls.innerHTML = "";
 
   if (totalPages === 0) {
-    return; // Se não houver páginas, não renderiza nada.
+    return;
   }
 
   if (currentPage > totalPages) {
     currentPage = totalPages;
   }
 
+  const prevButton = document.createElement("li");
+  prevButton.classList.add("page-item");
+  if (currentPage === 1) {
+    prevButton.classList.add("disabled");
+  }
+  prevButton.innerHTML = `<a class="page-link" href="#"><i class="fa-solid fa-arrow-left"></i></a>`;
+  prevButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (currentPage > 1) {
+      currentPage--;
+      renderProducts(currentPage);
+      renderPagination();
+    }
+  });
+  paginationControls.appendChild(prevButton);
+
   for (let i = 1; i <= totalPages; i++) {
     const pageItem = document.createElement("li");
-    const isActive = i === currentPage ? "active" : ""; // Verifica se a página atual deve ter a classe "active"
+    const isActive = i === currentPage ? "active" : "";
     pageItem.classList.add("page-item");
     if (isActive) {
-      pageItem.classList.add(isActive); // Adiciona a classe "active" apenas se for válido
+      pageItem.classList.add(isActive);
     }
     pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
     pageItem.addEventListener("click", (e) => {
@@ -108,7 +124,25 @@ const renderPagination = () => {
     });
     paginationControls.appendChild(pageItem);
   }
+
+  // Botão "Próximo"
+  const nextButton = document.createElement("li");
+  nextButton.classList.add("page-item");
+  if (currentPage === totalPages) {
+    nextButton.classList.add("disabled");
+  }
+  nextButton.innerHTML = `<a class="page-link" href="#"><i class="fa-solid fa-arrow-right"></i></a>`;
+  nextButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (currentPage < totalPages) {
+      currentPage++;
+      renderProducts(currentPage);
+      renderPagination();
+    }
+  });
+  paginationControls.appendChild(nextButton);
 };
+
 
 const showDetails = (productId) => {
   const product = filteredProducts.find((p) => p.id === productId);

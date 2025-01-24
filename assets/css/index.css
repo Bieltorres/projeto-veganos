@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'poppins', sans-serif;
 }
 
 body {
@@ -11,10 +12,6 @@ body {
 .full-height {
     height: 100%;
     width: 100%;
-}
-
-body {
-    font-family: Arial, sans-serif;
 }
 
 .navbar {
@@ -42,7 +39,7 @@ body {
 }
 
 .custom-content-main {
-    margin-top: 10rem;
+    margin-top: 5rem;
 }
 
 h1 {

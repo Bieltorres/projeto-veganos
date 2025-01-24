@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./assets/css/index.css">
     <link rel="stylesheet" href="./assets/css/product.css">
     <link rel="icon" href="./assets/img/favicon.png" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -27,6 +28,7 @@
 
         <main class="container-fluid pt-5 full-height position-relative">
             <div class="content-main position-relative custom-content-main">
+                <a href="./index.html" class="back-to-home"><i class="fa-solid fa-arrow-left"></i> Voltar</a>
                 <section class="position-relative custom-card-product">
                     <div id="product-details" class="row align-items-center"></div>
                 </section>
@@ -61,23 +63,42 @@
             const productDetails = document.getElementById('product-details');
             productDetails.innerHTML = `
         <div class="col-md-6">
-          <img src="${product.image}" alt="${product.name}" class="img-fluid rounded">
+          <img src="${product.image}" alt="${product.name}" class="img-fluid rounded p-5">
         </div>
         <div class="col-md-6">
-          <h1 class="fs-4 custom-title-product">${product.name}</h1>
-          <h2 class="fw-bold custom-price fs-2">R$${product.price.toFixed(2)}</h2>
-          ${product.pricePromotion ? `<p class="text-muted"><s>R$ ${product.pricePromotion.toFixed(2)}</s></p>` : ""}
-             <p class="fw-light text-muted">
-                <span class="fw-bold">ou em 3x</span> de <span class="fw-bold">R$${(product.price / 3).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span> sem juros
-              </p>
-          <button class="btn btn-success btn-lg w-100 mb-4">COMPRAR</button>
-          <div class="border p-3">
-            <p class="mb-2"><strong>Frete e prazo de entrega</strong></p>
-            <div class="d-flex">
-              <input type="text" class="form-control me-2" placeholder="Informe seu CEP">
-              <button class="btn btn-warning text-white">CALCULAR</button>
-            </div>
+          <h1 class="fs-4 custom-title-product mb-3">${product.name}</h1>
+          <div class="prices">
+            ${product.pricePromotion
+                    ? ` 
+                <div class="price justify-content-start align-items-center">
+                  <div>
+                    <p class="text-decoration-line-through text-muted mb-1 fs-4">R$ ${product.price.toFixed(2)}</p>
+                  </div>
+                  <div>
+                    <p class="mb-1 custom-price fs-1">R$${product.pricePromotion.toFixed(2)}</p>
+                    <div class="promo-badge"><span>${Math.round(((product.price - product.pricePromotion) / product.price) * 100)}%</span> OFF</div>
+                  </div>
+                </div>`
+                    : `
+                <p class="fw-bold fs-3 custom-price mb-1">R$ ${product.price.toFixed(2)}</p>
+                `
+                }
           </div>
+          <p class="fw-light text-muted">
+            <span class="fw-bold">ou em 3x</span> de <span class="fw-bold">R$${(product.price / 3).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span> sem juros
+          </p>
+          <button class="btn btn-buy text-nowrap w-100 mt-3 mb-4 pb-2 fs-6">COMPRAR</button>
+          <div class="p-3 custom-calculate-frete">
+            <p class="mb-2"><strong>Calcular entrega</strong></p>
+            <div class="d-flex">
+              <input type="text" class="form-control me-2" id="cepInput" placeholder="Informe seu CEP">
+              <button class="btn custom-calculate" onclick="calcularFrete()">Calcular</button>
+            </div>
+            <p id="freteMensagem" class="mt-3 ms-3"></p>
+          </div>
+          <div>
+            Ingredientes:
+            </div>
         </div>
       `;
         } else {
@@ -87,6 +108,30 @@
           <p>Volte para a <a href="index.html">página inicial</a>.</p>
         </div>
       `;
+        }
+
+        const calcularFrete = () => {
+            const cep = document.getElementById('cepInput').value;
+            if (!cep) {
+                alert("Por favor, insira um CEP válido.");
+                return;
+            }
+
+            fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.erro) {
+                        document.getElementById('freteMensagem').innerText = "CEP não encontrado. Tente novamente.";
+                    } else {
+                        const cidade = data.localidade;
+                        const uf = data.uf;
+                        document.getElementById('freteMensagem').innerHTML = `Entrega <span class="frete-gratis">grátis</span> para ${cidade} - ${uf}`;
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('freteMensagem').innerText = "Erro ao consultar o CEP. Tente novamente.";
+                    console.error(error);
+                });
         }
     </script>
 

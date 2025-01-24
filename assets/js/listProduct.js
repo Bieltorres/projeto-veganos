@@ -131,7 +131,6 @@ const renderPagination = () => {
   });
   paginationControls.appendChild(prevButton);
 
-  // Renderiza os números das páginas
   for (let i = 1; i <= totalPages; i++) {
     const pageItem = document.createElement("li");
     const isActive = i === currentPage ? "active" : "";

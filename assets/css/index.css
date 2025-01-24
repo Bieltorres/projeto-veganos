@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+body {
+    background-color: #f0e9cd15;
+}
+
 .full-height {
     height: 100%;
     width: 100%;
@@ -44,6 +48,13 @@ body {
 h1 {
     font-family: 'poppins';
     color: #28a745;
+}
+
+.custom-order-price {
+    background-color: transparent;
+    border: none;
+    margin-left: -5px;
+    cursor: pointer;
 }
 
 .form-select {
@@ -97,6 +108,11 @@ h1 {
 .custom-filters {
     font-family: 'poppins', sans-serif;
     color: #264935;
+    font-size: 14px;
+}
+
+.custom-items-per-page>select {
+    font-size: 14px;
 }
 
 .about-products {
@@ -212,12 +228,17 @@ h1 {
     transform: translateX(100%);
     transition: transform 0.3s ease-in-out;
     background-color: #fff;
+    font-family: 'poppins', sans-serif;
 }
 
 .sidebar.open {
     transform: translateX(0);
     opacity: 1;
     pointer-events: auto;
+}
+
+.form-check-input {
+    cursor: pointer;
 }
 
 .sidebar .close-btn {

@@ -5,42 +5,51 @@ const products = [
   { id: 4, name: "Vegan Cheese", price: 18.0, image: "./assets/img/imgProducts/burger4.png", category: "burger" },
   { id: 5, name: "Vegan Dish", price: 18.0, image: "./assets/img/imgProducts/prato1.png", category: "dish" },
   { id: 6, name: "Vegan Dish", price: 18.0, image: "./assets/img/imgProducts/prato2.png", category: "dish" },
-  { id: 7, name: "Vegan Dish", price: 18.0, image: "./assets/img/imgProducts/prato3.png", category: "dish" },
+  { id: 7, name: "Vegan Dish", price: 18.1, image: "./assets/img/imgProducts/prato3.png", category: "dish" },
   { id: 8, name: "Vegan Dish", price: 18.0, image: "./assets/img/imgProducts/prato4.png", category: "dish" },
   { id: 9, name: "Vegan Burguer", price: 28.0, image: "./assets/img/imgProducts/burger5.png", category: "burger" },
   { id: 10, name: "Vegan Pizza", price: 88.9, pricePromotion: 59.9, image: "./assets/img/imgProducts/pizza.png", category: "pizza" },
 ];
 
+let currentPage = 1;
+let filteredProducts = [...products];
 let productsPerPage = 4;
 
-function handleItemsPerPageChange(select) {
-  productsPerPage = parseInt(select.value, 10);
+const handleOrderIProducts = (select) => {
+  const selectedValue = select.value;
+
+  if (selectedValue === "menor") {
+    filteredProducts.sort((a, b) => (a.pricePromotion || a.price) - (b.pricePromotion || b.price));
+  } else if (selectedValue === "maior") {
+    filteredProducts.sort((a, b) => (b.pricePromotion || b.price) - (a.pricePromotion || a.price));
+  } else if (selectedValue === "promocao") {
+    filteredProducts.sort((a, b) => {
+      const aHasPromotion = a.pricePromotion !== undefined;
+      const bHasPromotion = b.pricePromotion !== undefined;
+
+      if (aHasPromotion && !bHasPromotion) return -1;
+      if (!aHasPromotion && bHasPromotion) return 1;
+
+      return (a.pricePromotion || a.price) - (b.pricePromotion || b.price);
+    });
+  }
 
   currentPage = 1;
   renderProducts(currentPage);
   renderPagination();
 };
 
-document.addEventListener("DOMContentLoaded", () => {
+const handleItemsPerPageChange = (select) => {
+  productsPerPage = parseInt(select.value, 10);
+  currentPage = 1;
   renderProducts(currentPage);
   renderPagination();
-});
-
-let currentPage = 1;
-let filteredProducts = [...products];
-
-const searchInput = document.getElementById("searchInput");
-const paginationControls = document.getElementById("paginationControls");
-const productList = document.getElementById("productList");
+};
 
 const renderProducts = (page) => {
   const startIndex = (page - 1) * productsPerPage;
   const endIndex = startIndex + productsPerPage;
   const productsToRender = filteredProducts.slice(startIndex, endIndex);
-
-  console.log("Página atual:", page);
-  console.log("Índices dos produtos:", startIndex, endIndex);
-  console.log("Produtos exibidos:", productsToRender);
 
   productList.innerHTML = "";
 
@@ -67,14 +76,14 @@ const renderProducts = (page) => {
                 hasPromotion
                   ? `
                 <div class="price">
-                  <p class="card-text custom-price-promotion text-decoration-line-through text-muted mb-1">R$${product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
-                  <p class="card-text custom-price mb-1">R$${product.pricePromotion.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+                  <p class="text-decoration-line-through text-muted mb-1">R$${product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
+                  <p class="custom-price mb-1">R$${product.pricePromotion.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
                 </div>
                 `
-                  : `<p class="card-text custom-price mb-1 text-center">R$${product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>`
+                  : `<p class="custom-price mb-1 text-center">R$${product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>`
               }
               <p class="fw-light text-muted text-center">
-                  <span class="fw-bold">3x</span> de <span class="fw-bold">R$${(product.price / 3).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> sem juros
+                <span class="fw-bold">3x</span> de <span class="fw-bold">R$${(product.price / 3).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span> sem juros
               </p>
             </div>
             <div class="about-products mt-2"> 
@@ -122,6 +131,7 @@ const renderPagination = () => {
   });
   paginationControls.appendChild(prevButton);
 
+  // Renderiza os números das páginas
   for (let i = 1; i <= totalPages; i++) {
     const pageItem = document.createElement("li");
     const isActive = i === currentPage ? "active" : "";
@@ -157,26 +167,25 @@ const renderPagination = () => {
   paginationControls.appendChild(nextButton);
 };
 
-
 const showDetails = (productId) => {
   const product = filteredProducts.find((p) => p.id === productId);
-  alert(`Product: ${product.name}\nPrice: R$${product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`);
+  alert(`Produto: ${product.name}\nPreço: R$${product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`);
 };
 
 const showProducts = (productId) => {
   const product = filteredProducts.find((p) => p.id === productId);
-  alert(`Product: ${product.name}\nPrice: R$${product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`);
+  alert(`Produto: ${product.name}\nPreço: R$${product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`);
 };
 
 searchInput.addEventListener("input", (e) => {
   const searchValue = e.target.value.toLowerCase();
-  filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchValue)
-  );
+  filteredProducts = products.filter((product) => product.name.toLowerCase().includes(searchValue));
   currentPage = 1;
   renderProducts(currentPage);
   renderPagination();
 });
 
-renderProducts(currentPage);
-renderPagination();
+document.addEventListener("DOMContentLoaded", () => {
+  renderProducts(currentPage);
+  renderPagination();
+});

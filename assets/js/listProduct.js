@@ -87,8 +87,8 @@ const renderProducts = (page) => {
               </p>
             </div>
             <div class="about-products mt-2"> 
-              <button class="btn btn-buy" onclick="showDetails(${product.id})">Comprar</button>
-              <button class="btn btn-eye" onclick="showProducts(${product.id})"> <i class="fa-solid fa-eye"></i> Detalhes</button>
+              <a href="product.html?id=${product.id}"><button class="btn btn-buy text-nowrap w-auto" onclick="showDetails(${product.id})">Comprar</button></a>
+              <button class="btn btn-eye text-nowrap w-auto" onclick="showProducts(${product.id})"> <i class="fa-solid fa-eye"></i> Detalhes</button>
             </div>
           </div>
         </div>
@@ -169,7 +169,6 @@ const renderPagination = () => {
 
 const showDetails = (productId) => {
   const product = filteredProducts.find((p) => p.id === productId);
-  alert(`Produto: ${product.name}\nPreço: R$${product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`);
 };
 
 const showProducts = (productId) => {

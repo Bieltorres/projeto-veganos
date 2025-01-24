@@ -42,8 +42,7 @@ body {
     margin-top: 5rem;
 }
 
-h1 {
-    font-family: 'poppins';
+.custom-title {
     color: #28a745;
 }
 

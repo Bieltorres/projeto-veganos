@@ -8,7 +8,7 @@ const products = [
   { id: 7, name: "Vegan Dish", price: 18.0, image: "./assets/img/imgProducts/prato3.png", category: "dish" },
   { id: 8, name: "Vegan Dish", price: 18.0, image: "./assets/img/imgProducts/prato4.png", category: "dish" },
   { id: 9, name: "Vegan Burguer", price: 28.0, image: "./assets/img/imgProducts/burger5.png", category: "burger" },
-  { id: 10, name: "Vegan Pizza", price: 28.0, image: "./assets/img/imgProducts/pizza.png", category: "burger" },
+  { id: 10, name: "Vegan Pizza", price: 88.9, pricePromotion: 59.9, image: "./assets/img/imgProducts/pizza.png", category: "pizza" },
 ];
 
 let productsPerPage = 4;

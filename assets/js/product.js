@@ -265,20 +265,20 @@ if (product) {
         <img src="${product.image}" alt="${product.name}" class="img-fluid rounded img-product">
       </div>
       <div class="col-md-6 custom-card-name-and-price">
-        <h1 class="fs-4 custom-title-product mb-3 responsive-text">${product.name}</h1>
+        <h1 class="custom-title-product mb-3 responsive-text">${product.name}</h1>
         <div class="prices responsive-text">
           ${product.pricePromotion
             ? `
-              <div class="price justify-content-start align-items-center responsive-text">
+              <div class="price justify-content-start align-items-center">
                 <div>
-                  <p class="text-decoration-line-through text-muted mb-1 fs-4 responsive-text">R$ ${product.price.toFixed(2)}</p>
+                  <p class="text-decoration-line-through text-muted mb-1 custom-price-old">R$ ${product.price.toFixed(2)}</p>
                 </div>
                 <div>
-                  <p class="mb-1 custom-price fs-1 responsive-text">R$${product.pricePromotion.toFixed(2)}</p>
+                  <p class="mb-1 custom-price">R$${product.pricePromotion.toFixed(2)}</p>
                   <div class="promo-badge"><span>${Math.round(((product.price - product.pricePromotion) / product.price) * 100)}%</span> OFF</div>
                 </div>
               </div>` 
-            : `<p class="fw-bold fs-3 custom-price mb-1 responsive-text">R$ ${product.price.toFixed(2)}</p>`}
+            : `<p class="fw-bold custom-price mb-1 responsive-text">R$ ${product.price.toFixed(2)}</p>`}
         </div>
         <p class="fw-light text-muted responsive-text">
           <span class="fw-bold">ou em 3x</span> de <span class="fw-bold">R$${(product.price / 3).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span> sem juros

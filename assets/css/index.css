@@ -2,15 +2,16 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-main {
-    height: 84.5dvh;
-    width: 100%;
+    font-family: 'poppins', sans-serif;
 }
 
 body {
-    font-family: Arial, sans-serif;
+    background-color: #f0e9cd15;
+}
+
+.full-height {
+    height: 100%;
+    width: 100%;
 }
 
 .navbar {
@@ -37,9 +38,40 @@ body {
     gap: 1rem;
 }
 
-h1 {
-    font-family: 'poppins';
+.custom-content-main {
+    margin-top: 5rem;
+}
+
+.custom-title {
     color: #28a745;
+}
+
+.custom-order-price {
+    background-color: transparent;
+    border: none;
+    margin-left: -5px;
+    cursor: pointer;
+}
+
+.form-select {
+    width: fit-content;
+}
+
+.promo-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #a77965;
+    color: #f0e9cd;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 8px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .card img {
@@ -50,6 +82,8 @@ h1 {
 .card {
     box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
     border: 1px solid #f0e9cd;
+    display: flex;
+    align-items: center;
 }
 
 .card-body {
@@ -63,15 +97,38 @@ h1 {
     font-family: 'poppins', sans-serif;
 }
 
+.btn-open-filters {
+    cursor: pointer;
+}
+
+.custom-filters {
+    font-family: 'poppins', sans-serif;
+    color: #264935;
+    font-size: 14px;
+}
+
+.custom-items-per-page>select {
+    font-size: 14px;
+}
+
 .about-products {
     display: flex;
     width: 100%;
     gap: 1rem;
 }
 
-.btn-buy, .btn-eye {
+.custom-img-product {
+    width: 75%;
+    margin-top: 1rem;
+}
+
+.btn-buy,
+.btn-eye {
     width: 50%;
     height: fit-content;
+    font-family: 'poppins', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
 }
 
 .btn-eye {
@@ -93,11 +150,29 @@ h1 {
     color: #264935;
 }
 
+.custom-price-promotion {
+    font-size: 20px;
+}
+
 .custom-price {
     color: #a77965;
-    font-size: 20px;
+    font-size: 24px;
     font-family: 'poppins', sans-serif;
     font-weight: 700;
+}
+
+.price {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: calc(10%);
+}
+
+.prices {
+    font-family: 'poppins', sans-serif;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
 }
 
 .btn-eye {
@@ -105,8 +180,7 @@ h1 {
     transition: .4s;
 }
 
-.btn-eye:hover {
-}
+.btn-eye:hover {}
 
 .fa-eye {
     color: #264935;
@@ -120,4 +194,98 @@ h1 {
 .custom-footer {
     background-color: #264935;
     width: 100%;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); 
+    backdrop-filter: blur(5px); 
+    z-index: 7000; 
+    display: none;
+}
+
+.overlay.openOverlay {
+    display: block;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 100%;
+    box-shadow: -2px 0 5px rgba(87, 87, 87, 0.103);
+    padding: 1rem 2rem 1rem 1rem;
+    z-index: 7000;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    background-color: #fff;
+    font-family: 'poppins', sans-serif;
+}
+
+.sidebar.open {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.form-check-input {
+    cursor: pointer;
+}
+
+.sidebar .close-btn {
+    opacity: 0; 
+    pointer-events: none; 
+    transform: translateX(-100%);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.sidebar.open .close-btn {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+}
+
+.close-btn {
+    left: -1rem;
+}
+
+.btn-close-sidebar {
+    width: 30px; 
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #a77965;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: 800;
+}
+
+.page-link {
+
+    opacity: .6;
+    background-color: transparent;
+    color: #28a745;
+    border: 1px solid #28a745;
+    border-radius: 50%;
+    padding: 5px 12px;
+}
+
+.page-link:hover {
+    background-color: #28a745;
+    color: #fff;
+    border: 1px solid #f0e9cd;
+}
+
+.active>.page-link {
+    opacity: 1;
+    background-color: #28a745;
+    border: 1px solid #f0e9cd;
 }

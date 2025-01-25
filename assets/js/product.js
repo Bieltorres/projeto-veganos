@@ -262,51 +262,50 @@ if (product) {
     productDetails.innerHTML = `
     <div class="custom-container">
       <div class="col-md-6 custom-card-img-product">
-        <img src="${product.image}" alt="${product.name}" class="img-fluid rounded p-5">
+        <img src="${product.image}" alt="${product.name}" class="img-fluid rounded img-product">
       </div>
-      <div class="col-md-6">
-        <h1 class="fs-4 custom-title-product mb-3">${product.name}</h1>
-        <div class="prices">
+      <div class="col-md-6 custom-card-name-and-price">
+        <h1 class="fs-4 custom-title-product mb-3 responsive-text">${product.name}</h1>
+        <div class="prices responsive-text">
           ${product.pricePromotion
-        ? ` 
-              <div class="price justify-content-start align-items-center">
+            ? `
+              <div class="price justify-content-start align-items-center responsive-text">
                 <div>
-                  <p class="text-decoration-line-through text-muted mb-1 fs-4">R$ ${product.price.toFixed(2)}</p>
+                  <p class="text-decoration-line-through text-muted mb-1 fs-4 responsive-text">R$ ${product.price.toFixed(2)}</p>
                 </div>
                 <div>
-                  <p class="mb-1 custom-price fs-1">R$${product.pricePromotion.toFixed(2)}</p>
+                  <p class="mb-1 custom-price fs-1 responsive-text">R$${product.pricePromotion.toFixed(2)}</p>
                   <div class="promo-badge"><span>${Math.round(((product.price - product.pricePromotion) / product.price) * 100)}%</span> OFF</div>
                 </div>
-              </div>` : `
-              <p class="fw-bold fs-3 custom-price mb-1">R$ ${product.price.toFixed(2)}</p>
-              `}
+              </div>` 
+            : `<p class="fw-bold fs-3 custom-price mb-1 responsive-text">R$ ${product.price.toFixed(2)}</p>`}
         </div>
-        <p class="fw-light text-muted">
+        <p class="fw-light text-muted responsive-text">
           <span class="fw-bold">ou em 3x</span> de <span class="fw-bold">R$${(product.price / 3).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span> sem juros
         </p>
-        <button class="btn btn-buy text-nowrap mb-4 custom-btn-buy-product">Comprar</button>
-        <div class="p-3 custom-calculate-frete">
+        <button class="btn btn-buy text-nowrap mb-4 custom-btn-buy-product responsive-text">Comprar</button>
+        <div class="p-3 custom-calculate-frete responsive-text">
           <p class="mb-2"><strong>Calcular entrega</strong></p>
-          <div class="d-flex">
+          <div class="d-flex custom-content-frete">
             <input type="text" class="form-control me-2" id="cepInput" placeholder="Informe seu CEP">
             <button class="btn custom-calculate" onclick="calcularFrete()">Calcular</button>
           </div>
           <p id="freteMensagem" class="mt-3 ms-3"></p>
         </div>
       </div>
-      </div>
-         <div class="accordion" id="accordionExample">
+    </div>
+    <div class="accordion responsive-text" id="accordionExample">
       <div class="accordion-item">
-        <h2 class="accordion-header" id="headingOne">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        <h2 class="accordion-header responsive-text" id="headingOne">
+          <button class="accordion-button responsive-text" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
             Ingredientes
           </button>
         </h2>
         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-          <div class="accordion-body">
+          <div class="accordion-body responsive-text">
             <div class="d-flex w-100 flex-column">
               <div>
-                <h2 class="mt-4">Ingredientes:</h2>
+                <h2 class="mt-4 responsive-text">Ingredientes:</h2>
                 ${ingredientesHTML}
               </div>
             </div>
@@ -314,7 +313,9 @@ if (product) {
         </div>
       </div>
     </div>
-    `;
+  `;
+  
+  
 } else {
   document.getElementById('product-details').innerHTML = `
     <div class="text-center">

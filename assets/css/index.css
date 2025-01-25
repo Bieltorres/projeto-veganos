@@ -107,6 +107,10 @@ body {
     font-size: 14px;
 }
 
+.custom-items-per-page {
+    top: -1rem;
+}
+
 .custom-items-per-page>select, .custom-items-per-page {
     font-size: 14px;
 }
@@ -192,6 +196,10 @@ body {
 .btn-primary:hover {
     background-color: #f0e9cd;
     color: #264935;
+}
+
+.custom-pagination {
+    padding: 3rem 0rem 1rem 0rem;
 }
 
 .custom-footer {

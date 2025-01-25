@@ -107,6 +107,10 @@ body {
     font-size: 14px;
 }
 
+.custom-items-per-page {
+    top: -1rem;
+}
+
 .custom-items-per-page>select, .custom-items-per-page {
     font-size: 14px;
 }
@@ -117,7 +121,7 @@ body {
     gap: 1rem;
 }
 
-.custom-img-product {
+.custom-card-img-product {
     width: 75%;
     margin-top: 1rem;
 }
@@ -157,13 +161,20 @@ body {
     color: #f0e9cd;
 }
 
+.custom-price-old {
+    font-size: 24px;
+}
+
+.custom-price {
+    font-size: 28px;
+}
+
 .custom-price-promotion {
     font-size: 20px;
 }
 
 .custom-price {
     color: #a77965;
-    font-size: 24px;
     font-family: 'poppins', sans-serif;
     font-weight: 700;
 }
@@ -185,6 +196,10 @@ body {
 .btn-primary:hover {
     background-color: #f0e9cd;
     color: #264935;
+}
+
+.custom-pagination {
+    padding: 3rem 0rem 1rem 0rem;
 }
 
 .custom-footer {
@@ -298,4 +313,10 @@ body {
     background-color: #dc3545;
     color: #f0e9cd;
     border: 1px solid #f0e9cd;
+}
+
+@media (max-width: 425px) {
+    .custom-card-img-product {
+      width: 55%;
+    }
 }

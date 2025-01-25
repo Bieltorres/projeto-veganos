@@ -291,7 +291,7 @@ const renderProducts = (page) => {
       <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
         <div class="card position-relative">
           ${hasPromotion ? `<div class="promo-badge"><span>${discountPercentage}%</span> <span>OFF</span></div>` : ""}
-          <img src="${product.image}" class="card-img-top custom-img-product" alt="${product.name}">
+          <img src="${product.image}" class="card-img-top custom-card-img-product" alt="${product.name}">
           <div class="card-body">
             <h5 class="card-title mt-4 mb-3 text-center">${product.name}</h5>
             <div class="prices">

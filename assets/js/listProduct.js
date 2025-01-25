@@ -76,7 +76,7 @@ const renderProducts = (page) => {
                 hasPromotion
                   ? `
                 <div class="price">
-                  <p class="text-decoration-line-through text-muted mb-1">R$${product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
+                  <p class="text-decoration-line-through mb-1 custom-price-old fs-5">R$${product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
                   <p class="custom-price mb-1">R$${product.pricePromotion.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
                 </div>
                 `

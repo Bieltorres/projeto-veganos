@@ -1,3 +1,5 @@
+
+
 .custom-title-product {
     color: #222222;
     font-weight: 600;
@@ -12,8 +14,7 @@
 
 .back-to-home {
     text-decoration: none;
-    color: #28a745;
-    font-weight: 700;
+    color: black;
     cursor: pointer;
 }
 
@@ -33,7 +34,7 @@
 
 .custom-calculate {
     border: 1px solid #f0e9cd;
-    font-size: 16px;
+    font-size: 14px;
     background-color: #a77965;
     color: #fff;
 }

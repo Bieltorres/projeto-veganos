@@ -121,7 +121,7 @@ body {
     gap: 1rem;
 }
 
-.custom-img-product {
+.custom-card-img-product {
     width: 75%;
     margin-top: 1rem;
 }
@@ -315,3 +315,8 @@ body {
     border: 1px solid #f0e9cd;
 }
 
+@media (max-width: 425px) {
+    .custom-card-img-product {
+      width: 55%;
+    }
+}

@@ -59,7 +59,7 @@ body {
 
 .promo-badge {
     position: absolute;
-    top: 10px;
+    top: 20px;
     left: 10px;
     background-color: #dc3545;
     color: #f0e9cd;
@@ -152,7 +152,7 @@ body {
 }
 
 .btn-buy:hover {
-    background-color: #dc3545;
+    background-color: #a77965;
     border: 1px solid #f0e9cd;
     color: #f0e9cd;
 }
@@ -283,5 +283,19 @@ body {
 .active>.page-link {
     opacity: 1;
     background-color: #28a745;
+    border: 1px solid #f0e9cd;
+}
+
+.custom-btn-close-modal {
+    background-color: #264935;
+    color: #f0e9cd;
+    transition: .4s;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.custom-btn-close-modal:hover {
+    background-color: #dc3545;
+    color: #f0e9cd;
     border: 1px solid #f0e9cd;
 }

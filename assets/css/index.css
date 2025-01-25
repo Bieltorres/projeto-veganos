@@ -280,13 +280,12 @@ body {
 }
 
 .page-link {
-
     opacity: .6;
     background-color: transparent;
-    color: #28a745;
-    border: 1px solid #28a745;
+    color: #a77965;
+    border: 1px solid #a77965;
     border-radius: 50%;
-    padding: 5px 12px;
+    padding: 5px 16px;
 }
 
 .page-link:hover {
@@ -297,7 +296,7 @@ body {
 
 .active>.page-link {
     opacity: 1;
-    background-color: #28a745;
+    background-color: #a77965;
     border: 1px solid #f0e9cd;
 }
 
@@ -315,9 +314,15 @@ body {
     border: 1px solid #f0e9cd;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 425px) {
     .custom-card-img-product {
       width: 55%;
+    }
+}
+
+@media (max-width: 320px) {
+    .custom-card-img-product {
+      width: 60%;
     }
 }
 

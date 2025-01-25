@@ -2,7 +2,7 @@ const products = [
   {
     id: 1,
     name: "Vegan Power Burger",
-    price: 25.0,
+    price: 49.0,
     image: "./assets/img/imgProducts/burger1.png",
     category: "burger",
     ingredientes: [
@@ -29,8 +29,8 @@ const products = [
   {
     id: 2,
     name: "Quinoa Crunch Burguer",
-    price: 19.5,
-    pricePromotion: 12.9,
+    price: 79.5,
+    pricePromotion: 29.9,
     image: "./assets/img/imgProducts/burger2.png",
     category: "burger",
     ingredientes: [
@@ -56,7 +56,7 @@ const products = [
   {
     id: 3,
     name: "Mediterranean Delight Burger",
-    price: 15.5,
+    price: 55.5,
     image: "./assets/img/imgProducts/burger3.png",
     category: "burger",
     ingredientes: [
@@ -86,7 +86,7 @@ const products = [
   {
     id: 4,
     name: "Avocado Sriracha Burger",
-    price: 18.0,
+    price: 58.0,
     image: "./assets/img/imgProducts/burger4.png",
     category: "burger",
     ingredientes: [
@@ -113,7 +113,7 @@ const products = [
   {
     id: 5,
     name: "Mushroom Medley Stew",
-    price: 18.0,
+    price: 88.0,
     image: "./assets/img/imgProducts/prato1.png",
     category: "dish",
     ingredientes: [
@@ -133,7 +133,7 @@ const products = [
   },
   {
     id: 6, name: "Shiitake Pasta with Cashew Cream",
-    price: 18.0,
+    price: 89.1,
     image: "./assets/img/imgProducts/prato2.png",
     category: "dish",
     ingredientes: [
@@ -156,7 +156,8 @@ const products = [
   {
     id: 7,
     name: "Mushroom Toast with Cream Cheese",
-    price: 18.1,
+    price: 108.3,
+    pricePromotion: 89.9,
     image: "./assets/img/imgProducts/prato3.png",
     category: "dish",
     ingredientes: [
@@ -177,7 +178,7 @@ const products = [
   {
     id: 8,
     name: "Veggie Farro Bowl with Harissa",
-    price: 18.0,
+    price: 79.9,
     image: "./assets/img/imgProducts/prato4.png",
     category: "dish",
     ingredientes: [
@@ -217,7 +218,7 @@ const products = [
   {
     id: 10,
     name: "Mediterranean Pizza",
-    price: 88.9,
+    price: 102.9,
     pricePromotion: 59.9,
     image: "./assets/img/imgProducts/pizza.png",
     category: "pizza",

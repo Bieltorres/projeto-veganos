@@ -261,7 +261,7 @@ if (product) {
 
     productDetails.innerHTML = `
     <div class="custom-container">
-      <div class="col-md-6 custom-card-img-product">
+      <div class="col-md-6 custom-img-product">
         <img src="${product.image}" alt="${product.name}" class="img-fluid rounded img-product">
       </div>
       <div class="col-md-6 custom-card-name-and-price">
@@ -284,10 +284,8 @@ if (product) {
           <span class="fw-bold">ou em 3x</span> de <span class="fw-bold">R$${(product.price / 3).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span> sem juros
         </p>
         <button class="btn btn-buy text-nowrap mb-4 custom-btn-buy-product">Comprar</button>
-      </div>
-    </div>
 
-        <div class="accordion" id="accordionExample">
+        <div class="accordion custom-accordion-frete" id="accordionExample">
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingOne">
           <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -307,8 +305,10 @@ if (product) {
         </div>
       </div>
     </div>
+      </div>
+    </div>
 
-    <div class="accordion mt-2" id="accordionExample">
+    <div class="accordion custom-accordion mt-2" id="accordionExample">
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingOne">
           <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">

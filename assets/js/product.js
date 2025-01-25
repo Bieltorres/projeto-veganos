@@ -234,231 +234,117 @@ const products = [
   },
 ];
 
-let currentPage = 1;
-let filteredProducts = [...products];
-let productsPerPage = 4;
+const params = new URLSearchParams(window.location.search);
+const productId = parseInt(params.get('id'));
 
-const handleOrderIProducts = (select) => {
-  const selectedValue = select.value;
+const product = products.find(p => p.id === productId);
 
-  if (selectedValue === "menor") {
-    filteredProducts.sort((a, b) => (a.pricePromotion || a.price) - (b.pricePromotion || b.price));
-  } else if (selectedValue === "maior") {
-    filteredProducts.sort((a, b) => (b.pricePromotion || b.price) - (a.pricePromotion || a.price));
-  } else if (selectedValue === "promocao") {
-    filteredProducts.sort((a, b) => {
-      const aHasPromotion = a.pricePromotion !== undefined;
-      const bHasPromotion = b.pricePromotion !== undefined;
-
-      if (aHasPromotion && !bHasPromotion) return -1;
-      if (!aHasPromotion && bHasPromotion) return 1;
-
-      return (a.pricePromotion || a.price) - (b.pricePromotion || b.price);
-    });
-  }
-
-  currentPage = 1;
-  renderProducts(currentPage);
-  renderPagination();
-};
-
-const handleItemsPerPageChange = (select) => {
-  productsPerPage = parseInt(select.value, 10);
-  currentPage = 1;
-  renderProducts(currentPage);
-  renderPagination();
-};
-
-const renderProducts = (page) => {
-  const startIndex = (page - 1) * productsPerPage;
-  const endIndex = startIndex + productsPerPage;
-  const productsToRender = filteredProducts.slice(startIndex, endIndex);
-
-  productList.innerHTML = "";
-
-  if (productsToRender.length === 0) {
-    productList.innerHTML = "<p>Nenhum produto encontrado.</p>";
-    return;
-  }
-
-  productsToRender.forEach((product) => {
-    const hasPromotion = product.pricePromotion !== undefined;
-    const discountPercentage = hasPromotion
-      ? Math.round(((product.price - product.pricePromotion) / product.price) * 100)
-      : 0;
-
-    const productCard = `
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-        <div class="card position-relative">
-          ${hasPromotion ? `<div class="promo-badge"><span>${discountPercentage}%</span> <span>OFF</span></div>` : ""}
-          <img src="${product.image}" class="card-img-top custom-img-product" alt="${product.name}">
-          <div class="card-body">
-            <h5 class="card-title mt-4 mb-3 text-center">${product.name}</h5>
-            <div class="prices">
-              ${hasPromotion
-        ? `
-                  <div class="price">
-                    <p class="text-decoration-line-through mb-1 custom-price-old fs-5">R$${product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
-                    <p class="custom-price mb-1">R$${product.pricePromotion.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
-                  </div>
-                  `
-        : `<p class="custom-price mb-1 text-center">R$${product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>`
+if (product) {
+    const productDetails = document.getElementById('product-details');
+    const categorias = {};
+  
+    product.ingredientes.forEach(ing => {
+      if (!categorias[ing.categoria]) {
+        categorias[ing.categoria] = [];
       }
-              <p class="fw-light text-muted text-center">
-                <span class="fw-bold">3x</span> de <span class="fw-bold">R$${(product.price / 3).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span> sem juros
-              </p>
-            </div>
-            <div class="about-products mt-2"> 
-              <a href="product.html?id=${product.id}"><button class="btn btn-buy text-nowrap w-auto">Comprar</button></a>
-              <button class="btn btn-eye text-nowrap w-auto" data-toggle="modal" data-target="#exampleModalLong" onclick="showDetails(${product.id})">
-                <i class="fa-solid fa-eye"></i> Detalhes
-              </button>
+      categorias[ing.categoria].push(ing.nome);
+    });
+  
+    let ingredientesHTML = '<ul>';
+    for (let categoria in categorias) {
+      ingredientesHTML += `<li class="fw-bold mt-4">${categoria}</li>`;
+      categorias[categoria].forEach(ingrediente => {
+        ingredientesHTML += `<li>${ingrediente}</li>`;
+      });
+    }
+    ingredientesHTML += '</ul>';
+  
+    productDetails.innerHTML = `
+    <div class="custom-container">
+      <div class="col-md-6 custom-card-img-product">
+        <img src="${product.image}" alt="${product.name}" class="img-fluid rounded img-product">
+      </div>
+      <div class="col-md-6 custom-card-name-and-price">
+        <h1 class="fs-4 custom-title-product mb-3 responsive-text">${product.name}</h1>
+        <div class="prices responsive-text">
+          ${product.pricePromotion
+            ? `
+              <div class="price justify-content-start align-items-center responsive-text">
+                <div>
+                  <p class="text-decoration-line-through text-muted mb-1 fs-4 responsive-text">R$ ${product.price.toFixed(2)}</p>
+                </div>
+                <div>
+                  <p class="mb-1 custom-price fs-1 responsive-text">R$${product.pricePromotion.toFixed(2)}</p>
+                  <div class="promo-badge"><span>${Math.round(((product.price - product.pricePromotion) / product.price) * 100)}%</span> OFF</div>
+                </div>
+              </div>` 
+            : `<p class="fw-bold fs-3 custom-price mb-1 responsive-text">R$ ${product.price.toFixed(2)}</p>`}
+        </div>
+        <p class="fw-light text-muted responsive-text">
+          <span class="fw-bold">ou em 3x</span> de <span class="fw-bold">R$${(product.price / 3).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span> sem juros
+        </p>
+        <button class="btn btn-buy text-nowrap mb-4 custom-btn-buy-product responsive-text">Comprar</button>
+        <div class="p-3 custom-calculate-frete responsive-text">
+          <p class="mb-2"><strong>Calcular entrega</strong></p>
+          <div class="d-flex custom-content-frete">
+            <input type="text" class="form-control me-2" id="cepInput" placeholder="Informe seu CEP">
+            <button class="btn custom-calculate" onclick="calcularFrete()">Calcular</button>
+          </div>
+          <p id="freteMensagem" class="mt-3 ms-3"></p>
+        </div>
+      </div>
+    </div>
+    <div class="accordion responsive-text" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header responsive-text" id="headingOne">
+          <button class="accordion-button responsive-text" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Ingredientes
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div class="accordion-body responsive-text">
+            <div class="d-flex w-100 flex-column">
+              <div>
+                <h2 class="mt-4 responsive-text">Ingredientes:</h2>
+                ${ingredientesHTML}
+              </div>
             </div>
           </div>
         </div>
-    
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <ul>
-                            <!-- Ingredientes preenchidos pela função showDetails -->
-                        </ul>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn custom-btn-close-modal" data-dismiss="modal">Fechar</button>
-                        <a id="buyButtonModal" href="#"><button class="btn btn-buy text-nowrap w-auto">Comprar</button></a>
-                    </div>
-                </div>
-            </div>
-        </div>
       </div>
-    `;
-    productList.innerHTML += productCard;
-  });
-};
+    </div>
+  `;
+  
+  
+} else {
+  document.getElementById('product-details').innerHTML = `
+    <div class="text-center">
+      <h2>Produto não encontrado</h2>
+      <p>Volte para a <a href="index.html">página inicial</a>.</p>
+    </div>
+  `;
+}
 
-const renderPagination = () => {
-  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
-
-  paginationControls.innerHTML = "";
-
-  if (totalPages === 0) {
+const calcularFrete = () => {
+  const cep = document.getElementById('cepInput').value;
+  if (!cep) {
+    alert("Por favor, insira um CEP válido.");
     return;
   }
 
-  if (currentPage > totalPages) {
-    currentPage = totalPages;
-  }
-
-  const prevButton = document.createElement("li");
-  prevButton.classList.add("page-item");
-  if (currentPage === 1) {
-    prevButton.classList.add("disabled");
-  }
-  prevButton.innerHTML = `<a class="page-link" href="#"><i class="fa-solid fa-arrow-left"></i></a>`;
-  prevButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    if (currentPage > 1) {
-      currentPage--;
-      renderProducts(currentPage);
-      renderPagination();
-    }
-  });
-  paginationControls.appendChild(prevButton);
-
-  for (let i = 1; i <= totalPages; i++) {
-    const pageItem = document.createElement("li");
-    const isActive = i === currentPage ? "active" : "";
-    pageItem.classList.add("page-item");
-    if (isActive) {
-      pageItem.classList.add(isActive);
-    }
-    pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
-    pageItem.addEventListener("click", (e) => {
-      e.preventDefault();
-      currentPage = i;
-      renderProducts(currentPage);
-      renderPagination();
+  fetch(`https://viacep.com.br/ws/${cep}/json/`)
+    .then(response => response.json())
+    .then(data => {
+      if (data.erro) {
+        document.getElementById('freteMensagem').innerText = "CEP não encontrado. Tente novamente.";
+      } else {
+        const cidade = data.localidade;
+        const uf = data.uf;
+        document.getElementById('freteMensagem').innerHTML = `Entrega <span class="frete-gratis">grátis</span> para ${cidade} - ${uf}`;
+      }
+    })
+    .catch(error => {
+      document.getElementById('freteMensagem').innerText = "Erro ao consultar o CEP. Tente novamente.";
+      console.error(error);
     });
-    paginationControls.appendChild(pageItem);
-  }
-
-  const nextButton = document.createElement("li");
-  nextButton.classList.add("page-item");
-  if (currentPage === totalPages) {
-    nextButton.classList.add("disabled");
-  }
-  nextButton.innerHTML = `<a class="page-link" href="#"><i class="fa-solid fa-arrow-right"></i></a>`;
-  nextButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    if (currentPage < totalPages) {
-      currentPage++;
-      renderProducts(currentPage);
-      renderPagination();
-    }
-  });
-  paginationControls.appendChild(nextButton);
-};
-
-function showDetails(productId) {
-  const product = products.find(p => p.id === productId);
-
-  const modalTitle = document.querySelector("#exampleModalLongTitle");
-  modalTitle.textContent = product.name;
-
-  const modalBody = document.querySelector(".modal-body ul");
-  modalBody.innerHTML = "";
-
-  const categorias = {};
-
-  product.ingredientes.forEach(ing => {
-    if (!categorias[ing.categoria]) {
-      categorias[ing.categoria] = [];
-    }
-    categorias[ing.categoria].push(ing.nome);
-  });
-
-  for (let categoria in categorias) {
-    const categoriaTitle = document.createElement("li");
-    categoriaTitle.classList.add("fw-bold");
-    categoriaTitle.classList.add("mt-4");
-    categoriaTitle.textContent = categoria;
-    modalBody.appendChild(categoriaTitle);
-
-    categorias[categoria].forEach(ingrediente => {
-      const li = document.createElement("li");
-      li.textContent = ingrediente;
-      modalBody.appendChild(li);
-    });
-  }
-
-  const buyButtonModal = document.getElementById("buyButtonModal");
-
-  if (buyButtonModal) {
-    buyButtonModal.onclick = function () {
-      window.location.href = `product.html?id=${product.id}`;
-    };
-  }
-
 }
-
-searchInput.addEventListener("input", (e) => {
-  const searchValue = e.target.value.toLowerCase();
-  filteredProducts = products.filter((product) => product.name.toLowerCase().includes(searchValue));
-  currentPage = 1;
-  renderProducts(currentPage);
-  renderPagination();
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  renderProducts(currentPage);
-  renderPagination();
-});

@@ -315,7 +315,7 @@ body {
     border: 1px solid #f0e9cd;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 600px) {
     .custom-card-img-product {
       width: 55%;
     }

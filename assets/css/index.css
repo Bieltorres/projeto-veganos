@@ -9,6 +9,10 @@ body {
     background-color: #f0e9cd15;
 }
 
+
+/*Header*/
+
+
 .full-height {
     height: 100%;
     width: 100%;
@@ -30,6 +34,9 @@ body {
 #searchInput:active {
     border: 1px solid #eac5b3;
 }
+
+
+/*Conteudo do corpo da pág*/
 
 .content-main {
     padding-top: 2rem;
@@ -74,6 +81,94 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+/*Filtro*/
+
+.btn-open-filters {
+    cursor: pointer;
+}
+
+.custom-filters {
+    font-family: 'poppins', sans-serif;
+    color: #264935;
+    font-size: 14px;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); 
+    backdrop-filter: blur(5px); 
+    z-index: 7000; 
+    display: none;
+}
+
+.overlay.openOverlay {
+    display: block;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 100%;
+    box-shadow: -2px 0 5px rgba(87, 87, 87, 0.103);
+    padding: 1rem 2rem 1rem 1rem;
+    z-index: 7000;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    background-color: #fff;
+    font-family: 'poppins', sans-serif;
+}
+
+.sidebar.open {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.form-check-input {
+    cursor: pointer;
+}
+
+.sidebar .close-btn {
+    opacity: 0; 
+    pointer-events: none; 
+    transform: translateX(-100%);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.sidebar.open .close-btn {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+}
+
+.close-btn {
+    left: -1rem;
+}
+
+.btn-close-sidebar {
+    width: 30px; 
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #a77965;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: 800;
+}
+
+
+/*Card do produto*/
+
+
 .card img {
     height: 200px;
     object-fit: cover;
@@ -95,24 +190,6 @@ body {
 .card-title {
     font-size: 16px;
     font-family: 'poppins', sans-serif;
-}
-
-.btn-open-filters {
-    cursor: pointer;
-}
-
-.custom-filters {
-    font-family: 'poppins', sans-serif;
-    color: #264935;
-    font-size: 14px;
-}
-
-.custom-items-per-page {
-    top: -1rem;
-}
-
-.custom-items-per-page>select, .custom-items-per-page {
-    font-size: 14px;
 }
 
 .about-products {
@@ -202,6 +279,20 @@ body {
     color: #264935;
 }
 
+
+
+/*Itens por pág e paginação*/
+
+
+
+.custom-items-per-page {
+    top: -1rem;
+}
+
+.custom-items-per-page>select, .custom-items-per-page {
+    font-size: 14px;
+}
+
 .custom-pagination {
     padding: 3rem 0rem 1rem 0rem;
 }
@@ -211,77 +302,9 @@ body {
     width: 100%;
 }
 
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); 
-    backdrop-filter: blur(5px); 
-    z-index: 7000; 
-    display: none;
-}
 
-.overlay.openOverlay {
-    display: block;
-}
+/*Modal de detalhes do produto*/
 
-.sidebar {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 300px;
-    height: 100%;
-    box-shadow: -2px 0 5px rgba(87, 87, 87, 0.103);
-    padding: 1rem 2rem 1rem 1rem;
-    z-index: 7000;
-    transform: translateX(100%);
-    transition: transform 0.3s ease-in-out;
-    background-color: #fff;
-    font-family: 'poppins', sans-serif;
-}
-
-.sidebar.open {
-    transform: translateX(0);
-    opacity: 1;
-    pointer-events: auto;
-}
-
-.form-check-input {
-    cursor: pointer;
-}
-
-.sidebar .close-btn {
-    opacity: 0; 
-    pointer-events: none; 
-    transform: translateX(-100%);
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-}
-
-.sidebar.open .close-btn {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateX(0);
-}
-
-.close-btn {
-    left: -1rem;
-}
-
-.btn-close-sidebar {
-    width: 30px; 
-    height: 30px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #a77965;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    font-weight: 800;
-}
 
 .page-link {
     opacity: .6;
@@ -304,6 +327,11 @@ body {
     border: 1px solid #f0e9cd;
 }
 
+.custom-btn-close {
+    border: none;
+    background-color: transparent;
+}
+
 .custom-btn-close-modal {
     background-color: #264935;
     color: #f0e9cd;
@@ -317,6 +345,10 @@ body {
     color: #f0e9cd;
     border: 1px solid #f0e9cd;
 }
+
+
+/*Media Queries de Responsividade*/
+
 
 @media (max-width: 425px) {
     .custom-card-img-product {

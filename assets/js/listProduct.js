@@ -375,13 +375,12 @@ const renderProducts = (page) => {
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLongTitle"></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close custom-btn-close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <ul>
-                            <!-- Ingredientes preenchidos pela função showDetails -->
                         </ul>
                     </div>
                     <div class="modal-footer">
@@ -469,6 +468,15 @@ function showDetails(productId) {
   const modalBody = document.querySelector(".modal-body ul");
   modalBody.innerHTML = "";
 
+  const productInfoTitle = document.createElement("h5");
+  productInfoTitle.classList.add("fw-bold", "mt-3");
+  productInfoTitle.textContent = "Descrição";
+  modalBody.appendChild(productInfoTitle);
+
+  const descriptionElement = document.createElement("li");
+  descriptionElement.textContent = product.description;
+  modalBody.appendChild(descriptionElement);
+
   const categorias = {};
 
   product.ingredientes.forEach(ing => {
@@ -477,6 +485,11 @@ function showDetails(productId) {
     }
     categorias[ing.categoria].push(ing.nome);
   });
+
+  const ingredientsTitle = document.createElement("h5");
+  ingredientsTitle.classList.add("fw-bold", "mt-4");
+  ingredientsTitle.textContent = "Ingredientes";
+  modalBody.appendChild(ingredientsTitle);
 
   for (let categoria in categorias) {
     const categoriaTitle = document.createElement("li");
@@ -492,6 +505,7 @@ function showDetails(productId) {
     });
   }
 
+  // Botão de compra no modal
   const buyButtonModal = document.getElementById("buyButtonModal");
 
   if (buyButtonModal) {
@@ -499,8 +513,8 @@ function showDetails(productId) {
       window.location.href = `product.html?id=${product.id}`;
     };
   }
-
 }
+
 
 searchInput.addEventListener("input", (e) => {
   const searchValue = e.target.value.toLowerCase();

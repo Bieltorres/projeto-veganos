@@ -259,12 +259,14 @@ if (product) {
     }
     ingredientesHTML += '</ul>';
 
+    const hasPromotion = product.pricePromotion !== undefined;
+
     productDetails.innerHTML = `
     <div class="custom-container">
       <div class="col-md-6 custom-img-product">
         <img src="${product.image}" alt="${product.name}" class="img-fluid rounded img-product">
       </div>
-      <div class="col-md-6 custom-card-name-and-price">
+      <div class="col-md-6 custom-card-name-and-price d-flex flex-column justify-content-center">
         <h1 class="custom-title-product mb-3">${product.name}</h1>
         <div class="prices">
           ${product.pricePromotion
@@ -280,8 +282,16 @@ if (product) {
               </div>`
             : `<p class="fw-bold custom-price mb-1">R$ ${product.price.toFixed(2)}</p>`}
         </div>
-        <p class="fw-light text-muted">
-          <span class="fw-bold">ou em 3x</span> de <span class="fw-bold">R$${(product.price / 3).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span> sem juros
+        <p class="fw-light text-muted custom-text-parceled">
+          ou em
+          <span class="fw-bold">3x</span> de 
+            <span class="fw-bold">
+              R$${(
+                (hasPromotion 
+                  ? product.pricePromotion 
+                  : product.price) / 3
+              ).toFixed(2).replace('.', ',')}
+            </span> sem juros        
         </p>
         <button class="btn btn-buy text-nowrap mb-4 custom-btn-buy-product">Comprar</button>
 
@@ -308,8 +318,8 @@ if (product) {
       </div>
     </div>
 
-    <div class="accordion custom-accordion mt-2" id="accordionExample">
-      <div class="accordion-item">
+    <div class="accordion  mt-2" id="accordionExample">
+      <div class="accordion-item custom-accordion">
         <h2 class="accordion-header" id="headingOne">
           <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
             Ingredientes

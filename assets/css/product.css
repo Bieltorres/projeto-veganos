@@ -25,6 +25,8 @@
 
 .img-product {
     padding: 3rem;
+    background-color: #f7f8e762;
+    border-radius: 10px;
 }
 
 .back-to-home {
@@ -104,7 +106,7 @@
     }
 
     .custom-title-product {
-        font-size: 16px;
+        font-size: 20px;
     }
 
     .custom-price-old {
@@ -112,7 +114,19 @@
     }
     
     .custom-price {
-        font-size: 18px;
+        font-size: 24px;
+    }
+
+    .custom-accordion-frete {
+        width: 100%;
+    }
+
+    .custom-btn-buy-product {
+        width: 100%;
+    }
+
+    .custom-text-parceled {
+        font-size: 14px;
     }
   }
 

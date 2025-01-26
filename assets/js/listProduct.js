@@ -305,9 +305,17 @@ const renderProducts = (page) => {
                   `
         : `<p class="custom-price mb-1 text-center">R$${product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>`
       }
-              <p class="fw-light text-muted text-center">
-                <span class="fw-bold">3x</span> de <span class="fw-bold">R$${(product.price / 3).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span> sem juros
-              </p>
+                <p class="fw-light text-muted text-center">
+                ou
+                  <span class="fw-bold">3x</span> de 
+                  <span class="fw-bold">
+                    R$${(
+                      (hasPromotion 
+                        ? product.pricePromotion 
+                        : product.price) / 3
+                    ).toFixed(2).replace('.', ',')}
+                  </span> sem juros
+                </p>
             </div>
             <div class="about-products mt-2"> 
               <a href="product.html?id=${product.id}"><button class="btn btn-buy text-nowrap w-auto">Comprar</button></a>

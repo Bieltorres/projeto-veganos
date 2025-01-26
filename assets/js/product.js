@@ -306,8 +306,7 @@ if (product) {
             </span> sem juros        
         </p>
         <button class="btn btn-buy text-nowrap mb-4 custom-btn-buy-product">Comprar</button>
-
-          <span class="mb-2">Calcular entrega </span>
+        <span class="mb-2 custom-calcular-entrega">Calcular entrega </span>
          <div class="d-flex w-100">
             <div class="d-flex w-100 flex-column custom-card-frete">
               <div class="d-flex w-100 custom-content-frete">

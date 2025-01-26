@@ -120,10 +120,6 @@
         padding: 0;
     }
 
-    .custom-title-product {
-        font-size: 20px;
-    }
-
     .custom-price-old {
         font-size: 14px;
     }
@@ -147,5 +143,16 @@
     .custom-card-frete {
         border-bottom: 1px solid #faf8dc5e;
     }    
+  }
+
+@media (max-width: 425px) {
+
+    .custom-calcular-entrega, .custom-card-frete * {
+        font-size: small;
+    }
+
+    .accordion-collapse {
+    font-size: small;
+}
   }
 

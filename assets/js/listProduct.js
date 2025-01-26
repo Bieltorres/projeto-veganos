@@ -277,12 +277,16 @@ const handleOrderIProducts = (select) => {
 
       return (a.pricePromotion || a.price) - (b.pricePromotion || b.price);
     });
+  } else if (selectedValue === "avaliacao") {
+    filteredProducts.sort((a, b) => b.rating - a.rating);
   }
 
   currentPage = 1;
+  
   renderProducts(currentPage);
   renderPagination();
 };
+
 
 const handleItemsPerPageChange = (select) => {
   productsPerPage = parseInt(select.value, 10);

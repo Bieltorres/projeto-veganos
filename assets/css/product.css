@@ -6,6 +6,12 @@
     border-radius: 10px;
 }
 
+.back-to-home {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
 .custom-title-product {
     color: #222222;
     font-weight: 600;
@@ -29,12 +35,6 @@
     border-radius: 10px;
 }
 
-.back-to-home {
-    text-decoration: none;
-    color: black;
-    cursor: pointer;
-}
-
 .prices {
     display: flex;
 }
@@ -46,6 +46,18 @@
 
 .custom-btn-buy-product {
     width: 90%;
+}
+
+.custom-content-frete {
+    justify-content: space-around;
+}
+
+.custom-content-frete > input {
+    width: 70%;
+}
+
+.custom-content-frete > button {
+    width: 20%;
 }
 
 .custom-accordion {
@@ -94,13 +106,6 @@
         width: 90%;
     }
 
-    .custom-content-frete {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-    }
-
     .img-product {
         padding: 0;
     }
@@ -128,5 +133,9 @@
     .custom-text-parceled {
         font-size: 14px;
     }
+
+    .custom-card-frete {
+        border-bottom: 1px solid #faf8dc5e;
+    }    
   }
 

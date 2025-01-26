@@ -295,26 +295,16 @@ if (product) {
         </p>
         <button class="btn btn-buy text-nowrap mb-4 custom-btn-buy-product">Comprar</button>
 
-        <div class="accordion custom-accordion-frete" id="accordionExample">
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingOne">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            Calcular entrega
-          </button>
-        </h2>
-        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-          <div class="accordion-body">
-            <div class="d-flex w-100 flex-column">
-          <div class="d-flex custom-content-frete">
-            <input type="text" class="form-control me-2" id="cepInput" placeholder="Informe seu CEP">
-            <button class="btn custom-calculate" onclick="calcularFrete()">Calcular</button>
-          <p id="freteMensagem" class="mt-3 ms-3"></p>
-        </div>
-            </div>
+          <span class="mb-2">Calcular entrega </span>
+         <div class="d-flex w-100">
+            <div class="d-flex w-100 flex-column custom-card-frete">
+              <div class="d-flex w-100 custom-content-frete">
+                <input type="text" class="form-control me-2" id="cepInput" placeholder="Informe seu CEP">
+                <button class="btn custom-calculate" onclick="calcularFrete()">Calcular</button>
+              </div>
+            <p id="freteMensagem" class="mt-3 ms-3"></p>
           </div>
         </div>
-      </div>
-    </div>
       </div>
     </div>
 

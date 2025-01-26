@@ -4,6 +4,7 @@ const products = [
     name: "Vegan Power Burger",
     description: "Vegan Power Burger: Uma explosão de sabores e energia em cada mordida! O Vegan Power Burger é feito com um delicioso pão vegano, recheado com abobrinha, cebola roxa e pimentão grelhados, além de um blend poderoso de feijão vermelho e flocos de aveia, criando uma textura incrível. O toque de salsinha fresca e o tempero suave de cúrcuma, páprica e caril elevam o sabor, enquanto o molho cremoso de leite de soja e suco de limão trazem leveza e frescor. Finalizado com um toque de sal e azeite de oliva extra virgem, esse lanche é perfeito para quem busca uma refeição nutritiva e cheia de energia, sem perder o sabor!",
     price: 49.0,
+    rating: 4,
     image: "./assets/img/imgProducts/burger1.png",
     category: "burger",
     ingredientes: [
@@ -273,12 +274,30 @@ if (product) {
 
     const hasPromotion = product.pricePromotion !== undefined;
 
+    const getStarRating = (rating) => {
+      let stars = '';
+      for (let i = 0; i < 5; i++) {
+        if (i < rating) {
+          stars += '<i class="fas fa-star filled"></i>';
+        } else {
+          stars += '<i class="far fa-star"></i>';
+        }
+      }
+      return stars;
+    }
+
     productDetails.innerHTML = `
     <div class="custom-container">
       <div class="col-md-6 custom-img-product">
         <img src="${product.image}" alt="${product.name}" class="img-fluid rounded img-product">
       </div>
       <div class="col-md-6 custom-card-name-and-price d-flex flex-column justify-content-center">
+        <div class="mb-3">
+          <div class="star-rating">
+            ${getStarRating(product.rating)}
+          </div>
+        </div>
+
         <h1 class="custom-title-product mb-3">${product.name}</h1>
         <div class="prices">
           ${product.pricePromotion

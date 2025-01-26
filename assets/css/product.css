@@ -87,6 +87,16 @@
     color: #28a745;
 }
 
+.custom-product-description {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.custom-product-description p {
+    width: 90%;
+}
+
 @media (max-width: 800px) {
     .custom-container {
       flex-direction: column; 

@@ -316,6 +316,7 @@ const renderProducts = (page) => {
                     ).toFixed(2).replace('.', ',')}
                   </span> sem juros
                 </p>
+
             </div>
             <div class="about-products mt-2"> 
               <a href="product.html?id=${product.id}"><button class="btn btn-buy text-nowrap w-auto">Comprar</button></a>
